@@ -13,9 +13,13 @@ sub new
 	die "Need a hashref" unless ref($in) eq 'HASH';
 
 	my $root = $in->{root} || die "Need a root for the server";
+	my $host = $in->{host} || die "Need a host for the server";
+	my $port = $in->{port} || die "Need a port for the server";
 
 	my $self = {
 		root => $root, 
+		host => $host, 
+		port => $port, 
 	};
 	bless $self, $class;
 }
@@ -71,14 +75,15 @@ sub _make_menu
 			filename => "$path/$dir_item", 
 		});
 
+		use Net::Gopher::Response::MenuItem;
 		my $item_selector = $selector . "/$dir_item";
-		push @menu_items, Gopher::Server::Response->new({
-			request      => $request, 
+		push @menu_items, Net::Gopher::Response::MenuItem->new({
+			#request      => $request, 
 			ItemType     => $item_type->gopher_type, 
 			Display      => $dir_item,
 			Selector     => $item_selector,
-			Host         => 'localhost',
-			Port         => 70,
+			Host         => $self->{host}, 
+			Port         => $self->{port},
 		});
 	}
 

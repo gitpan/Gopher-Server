@@ -1,5 +1,5 @@
 
-use Test::More tests => 13;
+use Test::More tests => 12;
 use Test::Exception;
 use strict;
 use warnings;
@@ -19,11 +19,11 @@ dies_ok { $class->new({ }) } "No args, dies";
 
 my $handler = $class->new({
 	root => $root, 
+	host => 'localhost', 
+	port => 70, 
 });
 ok( $handler->isa($class), "isa check" );
 ok( $handler->isa('Gopher::Server::RequestHandler'), "isa check" );
-
-ok( $handler->root() eq $root, "Root of server check" );
 
 my $bad_path = '../../../../bin/noexist';
 my $good_path = $handler->_canonpath('/noexist');

@@ -2,7 +2,7 @@
 use Module::Build;
 Module::Build->new(
 	module_name    => 'Gopher::Server', 
-	dist_version   => 0.1, 
+	dist_version   => 0.1.1, 
 	dist_author    => 'Timm Murray <tmurray@cpan.org>', 
 	dist_abstract  => 'Backend for Gopher Servers', 
 	license        => 'gpl', 
